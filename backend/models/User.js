@@ -6,11 +6,11 @@ const uniqueValidator = require("mongoose-unique-validator");
 
 // creation d'un schema de donnée
 const userSchema = mongoose.Schema({
-	email: { type: String, required: true, unique: true },
+	email: { type: String, required: true, unique: true, match: /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/ },
 	password: { type: String, required: true },
 });
 
-// on appel le pluggin avant l'export du schema
+// on appel le pluggin qui securise le schema avant l'export du schema
 userSchema.plugin(uniqueValidator);
 
 // Dans notre schéma, la valeur unique , avec l'élément mongoose-unique-validator passé comme plug-in, s'assurera qu'aucun des deux utilisateurs ne peut partager la même adresse e-mail.

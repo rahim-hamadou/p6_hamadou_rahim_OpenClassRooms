@@ -1,3 +1,5 @@
+// Utilisation: App.js fait appel aux différentes fonctions implémentées dans l'APi : Accès aux images, aux route User, aux route Sauce
+
 // importation de express ( librairie de fonction ) via require
 const express = require("express");
 
@@ -8,10 +10,20 @@ const bodyParser = require("body-parser");
 const app = express();
 
 // importation de mongoose pour liaison avec la base de données
+// plugin Mongoose pour se connecter à la data base Mongo Db
 const mongoose = require("mongoose");
 
 // appel de path qui donne acces au chemin de fichier
+// Plugin qui sert dans l'upload des images et permet de travailler avec les répertoires et chemin de fichier
 const path = require("path");
+
+// utilisation du module 'helmet' pour la sécurité en protégeant l'application de certaines vulnérabilités
+// il sécurise nos requêtes HTTP, sécurise les en-têtes, contrôle la prélecture DNS du navigateur, empêche le détournement de clics
+// et ajoute une protection XSS mineure et protège contre le reniflement de TYPE MIME
+// cross-site scripting, sniffing et clickjacking
+const helmet = require("helmet");
+
+const nocache = require("nocache");
 
 // importation du routeur sauce
 const routeSauce = require("./routes/routeSauce");
@@ -41,6 +53,13 @@ app.use((req, res, next) => {
 
 // appel de la methode body parser pour rendre exploitable toutes les requetes en object js utilisable json
 app.use(bodyParser.json());
+
+// Sécuriser Express en définissant divers en-têtes HTTP - https://www.npmjs.com/package/helmet#how-it-works
+// On utilise helmet pour plusieurs raisons notamment la mise en place du X-XSS-Protection afin d'activer le filtre de script intersites(XSS) dans les navigateurs web
+app.use(helmet());
+
+//Désactive la mise en cache du navigateur
+app.use(nocache());
 
 //appel du routeur par express
 

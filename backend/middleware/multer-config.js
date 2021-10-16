@@ -2,7 +2,7 @@
 // appel de multer ( qui permet de gerer les fichiers envoyer en http)
 const multer = require("multer");
 
-// creation d'un objet dictionnaire
+// creation d'un objet dictionnaire des types MIME pour définire le format des images
 const MIME_TYPE = {
 	"image/jpg": "jpg",
 	"image/jpeg": "jpg",

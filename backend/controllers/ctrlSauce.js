@@ -1,3 +1,6 @@
+// On prend toute la logique métier pour la déporter dans le fichier ctrlSauce.js de controllers
+// On ne garde que la logique de routing dans le fichier routeSauce.js du router. On importe aussi le model Sauce
+
 // importation du schema
 // importation du modele d'element sauce
 const Sauce = require("../models/Sauce");
